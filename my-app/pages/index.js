@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import { abi, NFT_CONTRACT_ADDRESS } from "../constants";
 import styles from "../styles/Home.module.css";
+import Image from 'next/image';
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -73,14 +74,9 @@ export default function Home() {
       });
 
       connectWallet();
-
       getTokenIdsMinted();
-
-      setInterval(async function () {
-        await getTokenIdsMinted();
-      }, 5 * 1000);
     }
-  }, [walletConnected]);
+  }, [walletConnected, connectWallet, getTokenIdsMinted]);
 
   const renderButton = () => {
     if (!walletConnected) {
@@ -111,9 +107,9 @@ export default function Home() {
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to the Red & White Army!</h1>
+          <h1 className={styles.title}>Welcome to the Red &amp; White Army!</h1>
           <div className={styles.description}>
-          It's an NFT collection for Arsenal Fans.
+          It&apos;s an NFT collection for Arsenal Fans.
           </div>
           <div className={styles.description}>
             {tokenIdsMinted}/34 have been minted
@@ -121,11 +117,11 @@ export default function Home() {
           {renderButton()}
         </div>
         <div>
-          <img className={styles.image} src="./Emirates_Stadium_Logo_Arsenal.jpeg" />
+          <Image className={styles.image} src="/Emirates_Stadium_Logo_Arsenal.jpeg" alt="Emirates Stadium Logo" width={500} height={345} />
         </div>
       </div>
 
-      <footer className={styles.footer}>Made with &#10084; for Arsenal Fans all over the world. ❤️ 🤍</footer>
+      <footer className={styles.footer}>Made with &hearts; for Arsenal Fans all over the world. &hearts; &hearts;</footer>
     </div>
   );
 }
